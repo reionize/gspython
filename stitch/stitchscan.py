@@ -32,9 +32,9 @@ def readdata(parent,allowance=10,baseline=75,normalize_height=True):
         List of scan directories
     hdata : dict of tuples
         Dictionary storing as values heightmap data in the form of a 2-tuple containing the heightmap and additional scan information, which are mapped to by keys given by scan position. 
-    hmaps : list of numpy ndarrays
+    hmaps : list of numpy.ndarrays
         List of ndarrays containing height data at every pixel location in each scan, represented from 0-1. 
-    ims : list of numpy ndarrays
+    ims : list of numpy.ndarrays
         List of ndarrays containing photographic image for each scan, with each pixel represented in RGB format as a list of ints from 0-255. Image is expected to be grayscale, so each pixel is expected to be of the form [value, value, value].
     """
     
@@ -140,17 +140,21 @@ def denserect(nbins, bins):
 
 def stitchborderpyr(im1, im2, levels=5):
     """
-    Description
+    Uses Gaussian pyramids to vertically blend two images. Based on OpenCV demo code at https://docs.opencv.org/3.4/dc/dff/tutorial_py_pyramids.html.
     
     Parameters
     ----------
-    param: type, optional?
-        lorem ipsum dolor
+    im1: numpy.ndarray
+        Image which will be stacked on the bottom, in a standard OpenCV format.
+    im2: numpy.ndarray
+        Image which will be stacked on the top, in the same format as im1.
+    levels: int, optional
+        Number of levels of pyramids to use.
     
     Returns
     -------
-    param : type
-        Description
+    result : numpy.ndarray
+        Vertically blending image with im2 on top of im1, in the same format as the inputs.
     """
     
     # generate Gaussian pyramids
@@ -185,7 +189,7 @@ def stitchborderpyr(im1, im2, levels=5):
     LS = []
     for l1,l2 in zip(lp1,lp2):
         rows,cols,dpt = l1.shape
-        ls = np.vstack((l1[0:rows//2], l2[rows//2:]))
+        ls = np.vstack((l2[0:rows//2], l1[rows//2:]))
         LS.append(ls)
     result = LS[0]
     for i in range(1,levels):
@@ -197,11 +201,27 @@ def stitchborderpyr(im1, im2, levels=5):
 
 def stitchscans(parentdir, fdata, allowance=20, normalize_height=True, nbins=10, ratio=0.7, levels=0, diagnose=False, mode='sift', tag=''):
     """
-    Description
+    Reads and stitches together scans of objects in fdata. Note that when using diagnostic mode or stitching multiple images in a script, stitching process for each image will not continue until current diagnostic image is closed, as cv.waitKey() is not specified.
     
     Parameters
     ----------
-    param: type, optional?
+    parentdir: type, optional?
+        lorem ipsum dolor
+    fdata: type, optional?
+        lorem ipsum dolor
+    allowance: type, optional
+        lorem ipsum dolor
+    normalize_height: type, optional
+        lorem ipsum dolor
+    ratio: type, optional
+        lorem ipsum dolor
+    levels: type, optional
+        lorem ipsum dolor
+    diagnose: type, optional
+        lorem ipsum dolor
+    mode: type, optional
+        lorem ipsum dolor
+    tag: type, optional
         lorem ipsum dolor
     
     Returns
