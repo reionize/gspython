@@ -60,45 +60,27 @@ python package_directory/stitch.py data_directory/Object1 data_directory/Object2
 
 You can use `python package_directory/stitch.py --help` or `python package_directory/stitch.py -h` to view additional options. An overview of the stitching routine is provided below. By default, the script writes all results to the path `package_directory/output/`. 
 
-<p align="center"> <b>
-stitch.py main() script
-</b> </p>
+**`stitch.py` script**
 
-$$ \downarrow $$
-
-<p align="center"> <b>
-    stitchscan.stitchscans() call 
-</b> </p>
-
-$$ \downarrow $$
-
-<p align="center"> <i>
-    Loop through each object
-    <br>
-    stitchscan.readdata() call to get scan data for object
-    <br>
-    Iterate through pairs of consecutive scans
-</i> </p>
-
-$$ \downarrow $$
-
-<p align="center">
-    stitchscan.getmatches() call to match features in pair of photographs
-    <br>
-    Compute 2D histogram of matches within scan
-    <br>
-    stitchscan.denserect() call to select area with good signal-to-noise ratio
-    <br>
-    Compute least-squares affine transformation from matches in selected area
-    <br>
-    Blend overlapping region to obtain stitched image
-</p>
-
-$$ \downarrow $$
-
-<p align="center"> <i>
-    Output final stitched photograph and heightmap of entire object
-</i> </p>
+    *`stitchscan.stitchscans()` call*
+    
+        Loop through objects
+        
+        1. `stitchscan.readdata()` call to get scan data for object
+        
+        2. Iterate through pairs of consecutive scans
+        
+            1. `stitchscan.getmatches()` call to match features in pair of photographs
+            
+            2. Compute 2D histogram of matches within scan
+            
+            3. `stitchscan.denserect()` call to select area with good signal-to-noise ratio
+            
+            4. Compute least-squares affine transformation from matches in selected area
+            
+            5. Blend overlapping region to obtain stitched image
+        
+        3. Output final stitched photograph and heightmap of entire object
 
 ## TODO
 1. Specify output directory
