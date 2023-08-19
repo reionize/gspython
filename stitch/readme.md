@@ -52,40 +52,37 @@ etc.
 
 To use the command line script, make sure that Python 3.x is enabled and type:
 
-`python package_directory/stitch.py data_directory/Object1 data_directory/Object2 ... data_directory/Object*`
+<div>
+    
+python package_directory/stitch.py data_directory/Object1 data_directory/Object2 ... data_directory/Object*
+    
+</div>
 
 You can use `python package_directory/stitch.py --help` or `python package_directory/stitch.py -h` to view additional options. An overview of the stitching routine is provided below. By default, the script writes all results to the path `package_directory/output/`. 
 
-<h4 style="text-align: center">
-    
-    stitch.py main() script
-    
-</h4>
+<p align="center"> <b>
+stitch.py main() script
+</b> </p>
 
 $$ \downarrow $$
 
-<h4 style="text-align: center">
-    
-    stitchscan.stitchscans() call
-    
-</h4>
+<p align="center"> <b>
+    stitchscan.stitchscans() call 
+</b> </p>
 
 $$ \downarrow $$
 
-<h5 style="text-align: center">
-    
+<p align="center"> <i>
     Loop through each object
     
     stitchscan.readdata() call to get scan data for object
     
     Iterate through pairs of consecutive scans
-    
-</h5>
+</i> </p>
 
 $$ \downarrow $$
 
-<div style="text-align: center">
-    
+<p align="center">
     stitchscan.getmatches() call to match features in pair of photographs
     
     Compute 2D histogram of matches within scan
@@ -95,16 +92,13 @@ $$ \downarrow $$
     Compute least-squares affine transformation from matches in selected area
     
     Blend overlapping region to obtain stitched image
-    
-</div>
+</p>
 
 $$ \downarrow $$
 
-<h5 style="text-align: center">
-    
+<p align="center"> <i>
     Output final stitched photograph and heightmap of entire object
-    
-</h5>
+</i> </p>
 
 ## TODO
 1. Specify output directory
