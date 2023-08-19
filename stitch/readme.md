@@ -62,9 +62,9 @@ You can use `python package_directory/stitch.py --help` or `python package_direc
 
 **`stitch.py` script**
 
-    *`stitchscan.stitchscans()` call*
+- *`stitchscan.stitchscans()` call*
     
-        Loop through objects
+    - Loop through objects
         
         1. `stitchscan.readdata()` call to get scan data for object
         
