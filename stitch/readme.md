@@ -4,6 +4,8 @@ The stitch package contains Python tools to process and stitch together photogra
 
 ## Requirements
 
+Python 3.x
+
 open source module `numpy`
 
 open source module `scipy`
@@ -16,7 +18,11 @@ open source package `gspython` with modules `readscan` and `readtmd`
 
 ## GelSight output file directory structure
 
-When using the GelSight system to make scans of a single object, the system outputs a number of folders named `Scan001`, `Scan002`, and so on, which are numbered in the order that the scan is performed. Each of these folders contains six PNG images which correspond to photographs taken with illumination from different angles, a composite photograph named `thumbnail.jpg`, a raw `Scan***.tmd` file which contains heightmap information, and a raw `scan.yaml` file with additional scan data. **In order to use the stitchscan package, you must make scans of the object such that each pair of consecutive scans includes  an overlapping window, then collect each of the `Scan***` folders corresponding to a single object into its own directory `object_name/`, without changing their internal structure, as shown below.** 
+When using the GelSight system to make scans of a single object, the system outputs a number of folders named `Scan001`, `Scan002`, and so on, which are numbered in the order that the scan is performed. Each of these folders contains six PNG images which correspond to photographs taken with illumination from different angles, a composite photograph named `thumbnail.jpg`, a raw `Scan***.tmd` file which contains heightmap information, and a raw `scan.yaml` file with additional scan data. 
+
+In order to fit together scans with the stitchscan package, you must make scans of each object such that every pair of consecutive scans includes  an overlapping window, then collect each of the `Scan***` folders corresponding to a single object into its own directory `object_name/`, without changing their internal structure, as shown below. 
+
+Currently, the `stitchscan` module and `stitch.py` script only support stitching together a single long strip. However, it is possible to circumvent this limitation by first stitching together vertical strips, then rotating all of the strips before stitching them together horizontally. 
 
 1. Object1/
     * Scan001/
@@ -36,15 +42,71 @@ When using the GelSight system to make scans of a single object, the system outp
         ...
     
     ...
-    * Scan***/
-        
-        ...
 2. Object2/
     
     ...
 
 etc.
 
+## Flowchart description of stitch.py routine
+
+To use the command line script, make sure that Python 3.x is enabled and type:
+
+`python package_directory/stitch.py data_directory/Object1 data_directory/Object2 ... data_directory/Object*`
+
+You can use `python package_directory/stitch.py --help` or `python package_directory/stitch.py -h` to view additional options. An overview of the stitching routine is provided below. By default, the script writes all results to the path `package_directory/output/`. 
+
+<h4 style="text-align: center">
+    
+    stitch.py main() script
+    
+</h4>
+
+$$ \downarrow $$
+
+<h4 style="text-align: center">
+    
+    stitchscan.stitchscans() call
+    
+</h4>
+
+$$ \downarrow $$
+
+<h5 style="text-align: center">
+    
+    Loop through each object
+    
+    stitchscan.readdata() call to get scan data for object
+    
+    Iterate through pairs of consecutive scans
+    
+</h5>
+
+$$ \downarrow $$
+
+<div style="text-align: center">
+    
+    stitchscan.getmatches() call to match features in pair of photographs
+    
+    Compute 2D histogram of matches within scan
+    
+    stitchscan.denserect() call to select area with good signal-to-noise ratio
+    
+    Compute least-squares affine transformation from matches in selected area
+    
+    Blend overlapping region to obtain stitched image
+    
+</div>
+
+$$ \downarrow $$
+
+<h5 style="text-align: center">
+    
+    Output final stitched photograph and heightmap of entire object
+    
+</h5>
+
 ## TODO
-1. Additional warnings for bad matches
-2. Linear blending for seams on heightmaps
+1. Specify output directory
+2. Additional warnings for bad matches
+3. Linear blending for seams on heightmaps
