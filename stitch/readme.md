@@ -74,9 +74,9 @@ $$ \downarrow $$
 
 <p align="center"> <i>
     Loop through each object
-    
+    <br>
     stitchscan.readdata() call to get scan data for object
-    
+    <br>
     Iterate through pairs of consecutive scans
 </i> </p>
 
@@ -84,13 +84,13 @@ $$ \downarrow $$
 
 <p align="center">
     stitchscan.getmatches() call to match features in pair of photographs
-    
+    <br>
     Compute 2D histogram of matches within scan
-    
+    <br>
     stitchscan.denserect() call to select area with good signal-to-noise ratio
-    
+    <br>
     Compute least-squares affine transformation from matches in selected area
-    
+    <br>
     Blend overlapping region to obtain stitched image
 </p>
 
