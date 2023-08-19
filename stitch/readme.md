@@ -66,21 +66,21 @@ You can use `python package_directory/stitch.py --help` or `python package_direc
     
     - Loop through objects
         
-        1. `stitchscan.readdata()` call to get scan data for object
+        - `stitchscan.readdata()` call to get scan data for object
         
-        2. Iterate through pairs of consecutive scans
+        - Iterate through pairs of consecutive scans
         
-            1. `stitchscan.getmatches()` call to match features in pair of photographs
+            - `stitchscan.getmatches()` call to match features in pair of photographs
             
-            2. Compute 2D histogram of matches within scan
+            - Compute 2D histogram of matches within scan
             
-            3. `stitchscan.denserect()` call to select area with good signal-to-noise ratio
+            - `stitchscan.denserect()` call to select area with good signal-to-noise ratio
             
-            4. Compute least-squares affine transformation from matches in selected area
+            - Compute least-squares affine transformation from matches in selected area
             
-            5. Blend overlapping region to obtain stitched image
+            - Blend overlapping region to obtain stitched image
         
-        3. Output final stitched photograph and heightmap of entire object
+        - Output final stitched photograph and heightmap of entire object
 
 ## TODO
 1. Specify output directory
