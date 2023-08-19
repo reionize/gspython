@@ -29,14 +29,20 @@ When using the GelSight system to make scans of a single object, the system outp
         * scan.yaml
         * Scan001.tmd
         * thumbnail.jpg
+        
         ...
     * Scan002/
+        
         ...
+    
     ...
-    * Scan00*/
+    * Scan***/
+        
         ...
 2. Object2/
+    
     ...
+
 ...
 
 ## TODO
