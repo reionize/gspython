@@ -16,7 +16,7 @@ open source package `gspython` with modules `readscan` and `readtmd`
 
 ## GelSight output file directory structure
 
-When using the GelSight system to make scans of a single object, the system outputs a number of folders named `Scan001`, `Scan002`, and so on, which are numbered in the order that the scan is performed. Each of these folders contains six PNG images which correspond to photographs taken with illumination from different angles, a composite photograph named `thumbnail.jpg`, a raw `Scan***.tmd` file which contains heightmap information, and a raw `scan.yaml` file with additional scan data. **In order to use the stitchscan package, you must make scans of the object such that each pair of consecutive scans includes  an overlapping window, then collect each of the `Scan***` folders corresponding to a single object into its own directory `object_name/`, without changing their internal structure.** 
+When using the GelSight system to make scans of a single object, the system outputs a number of folders named `Scan001`, `Scan002`, and so on, which are numbered in the order that the scan is performed. Each of these folders contains six PNG images which correspond to photographs taken with illumination from different angles, a composite photograph named `thumbnail.jpg`, a raw `Scan***.tmd` file which contains heightmap information, and a raw `scan.yaml` file with additional scan data. **In order to use the stitchscan package, you must make scans of the object such that each pair of consecutive scans includes  an overlapping window, then collect each of the `Scan***` folders corresponding to a single object into its own directory `object_name/`, without changing their internal structure, as shown below.** 
 
 1. Object1/
     * Scan001/
@@ -43,7 +43,7 @@ When using the GelSight system to make scans of a single object, the system outp
     
     ...
 
-...
+etc.
 
 ## TODO
 1. Additional warnings for bad matches
