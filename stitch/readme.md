@@ -51,13 +51,9 @@ etc.
 ## Flowchart description of stitch.py routine
 
 To use the command line script, make sure that Python 3.x is enabled and type:
-
-<div>
     
-python package_directory/stitch.py data_directory/Object1 data_directory/Object2 ... data_directory/Object*
+    python package_directory/stitch.py data_directory/Object1 data_directory/Object2 ... data_directory/Object*
     
-</div>
-
 You can use `python package_directory/stitch.py --help` or `python package_directory/stitch.py -h` to view additional options. An overview of the stitching routine is provided below. By default, the script writes all results to the path `package_directory/output/`. 
 
 **`stitch.py` script**
