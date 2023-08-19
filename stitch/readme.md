@@ -20,7 +20,7 @@ open source package `gspython` with modules `readscan` and `readtmd`
 
 When using the GelSight system to make scans of a single object, the system outputs a number of folders named `Scan001`, `Scan002`, and so on, which are numbered in the order that the scan is performed. Each of these folders contains six PNG images which correspond to photographs taken with illumination from different angles, a composite photograph named `thumbnail.jpg`, a raw `Scan***.tmd` file which contains heightmap information, and a raw `scan.yaml` file with additional scan data. 
 
-In order to fit together scans with the stitchscan package, you must make scans of each object such that every pair of consecutive scans includes  an overlapping window, then collect each of the `Scan***` folders corresponding to a single object into its own directory `object_name/`, without changing their internal structure, as shown below. 
+In order to fit together scans with the stitch package, you must make scans of each object such that every pair of consecutive scans includes  an overlapping window, then collect each of the `Scan***` folders corresponding to a single object into its own directory `object_name/`, without changing their internal structure, as shown below. 
 
 Currently, the `stitchscan` module and `stitch.py` script only support stitching together a single long strip. However, it is possible to circumvent this limitation by first stitching together vertical strips, then rotating all of the strips before stitching them together horizontally. 
 
@@ -79,6 +79,5 @@ You can use `python package_directory/stitch.py --help` or `python package_direc
         - Output final stitched photograph and heightmap of entire object
 
 ## TODO
-1. Specify output directory
-2. Additional warnings for bad matches
-3. Linear blending for seams on heightmaps
+1. Additional warnings for bad matches
+2. Re-normalize heightmaps at edge when stitching to make seams less visible

@@ -304,7 +304,7 @@ def getmatches(im1, im2, ratio=0.7, mode='sift'):
                 
     return kp1, kp2, matches, matchesMask, dxy, sign
 
-def stitchscans(objects, allowance=20, normalize_height=True, ratio=0.7, nbins=10, levels=0, reverse_order=False, diagnose=False, mode='sift', tag=''):
+def stitchscans(objects, allowance=20, normalize_height=True, ratio=0.7, nbins=10, levels=0, reverse_order=False, diagnose=False, mode='sift', out_dir='', tag=''):
     """
     Reads and stitches together scans of objects in fdata. Note that when using diagnostic mode, stitching process for each image may be paused until current diagnostic image is closed, as cv.waitKey() is not specified.
     
@@ -326,6 +326,8 @@ def stitchscans(objects, allowance=20, normalize_height=True, ratio=0.7, nbins=1
         Option to use diagnostic mode, which shows additional intermediate steps and does not save final output.
     mode: str, optional
         Algorithm to use for detecting and computing matches between keypoints in scan images. Default is 'sift' (recommended), but also accepts 'orb'.
+    out_dir: str, optional
+        Output directory. Default is the package directory.
     tag: str, optional
         Tag to include in output filename.
     
@@ -423,14 +425,15 @@ def stitchscans(objects, allowance=20, normalize_height=True, ratio=0.7, nbins=1
             plt.clf()
             plt.imshow(im)
 #             plt.show()
-            cv.imwrite('output/'+parent.split('/')[-2]+'_stitched'+tag+'.jpg',im)
+            out = out_dir + '/' if (len(out_dir) > 0 and out_dir[-1] != '/') else out_dir
+            cv.imwrite(out + 'output/'+parent.split('/')[-2]+'_stitched'+tag+'.jpg',im)
 
             plt.clf()
             plt.imshow(hm,cmap='viridis')
             ax = plt.gca()
             ax.get_xaxis().set_visible(False)
             ax.get_yaxis().set_visible(False)
-            plt.savefig('output/'+parent.split('/')[-2]+'_stitched'+tag+'_hm.jpg', dpi=300, bbox_inches='tight', pad_inches=0)
+            plt.savefig(out + 'output/'+parent.split('/')[-2]+'_stitched'+tag+'_hm.jpg', dpi=300, bbox_inches='tight', pad_inches=0)
         
         # show diagnostics
         else:
